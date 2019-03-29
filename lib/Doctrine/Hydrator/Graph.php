@@ -416,8 +416,13 @@ abstract class Doctrine_Hydrator_Graph extends Doctrine_Hydrator_Abstract
                     $matchedComponents[] = $table->getComponentName();
                 }
             } else {
-                list($key, $value) = each($inheritanceMap);
+                // There is exactly one key-value pair in inheritanceMap. This means we just need to get them.
+                // This replaces the old use of a single `each` as shorthand for this, implemented as an inline function
+                // to ensure we don't mess up the scope.
+                list ($key, $value) = $this->firstKeyValue($inheritanceMap);
+
                 $key = $this->_tables[$component]->getFieldName($key);
+
                 if ( ! isset($data[$key]) || $data[$key] != $value) {
                     continue;
                 } else {
@@ -433,5 +438,21 @@ abstract class Doctrine_Hydrator_Graph extends Doctrine_Hydrator_Abstract
         }
         
         return $matchedComponent;
+    }
+
+    /**
+     * Replaces old use of `each` to get the first key => value pair in the array.
+     *
+     * @param array $inheritanceMap
+     * @return array
+     */
+    private function firstKeyValue(array $inheritanceMap)
+    {
+        $keys = array_keys($inheritanceMap);
+        $vals = array_values($inheritanceMap);
+        return [
+            array_shift($keys),
+            array_shift($vals),
+        ];
     }
 }
