@@ -32,6 +32,12 @@
  */
 class Doctrine_Connection_Mysql_TestCase extends Doctrine_UnitTestCase
 {
+    public function init()
+    {
+        Doctrine_Manager::getInstance()->reset();
+        parent::init();
+    }
+
     public function testQuoteIdentifier()
     {
         $id = $this->connection->quoteIdentifier('identifier', false);
