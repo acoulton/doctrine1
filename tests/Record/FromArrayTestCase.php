@@ -82,7 +82,8 @@ class Doctrine_Record_FromArray_TestCase extends Doctrine_UnitTestCase
         $this->assertEqual($user->Phonenumber->count(), 1);
         $this->assertEqual($user->Phonenumber[0]->phonenumber, '555 321');
         $this->assertEqual($user->Email->address, 'johndow@mail.com');
-        $this->assertEqual($user->Group[0]->name, 'New Group');
-        $this->assertEqual($user->Group[1]->name, 'Group One');
+        # Note, ordering is non-deterministic
+        $this->assertEqual($user->Group[1]->name, 'New Group');
+        $this->assertEqual($user->Group[0]->name, 'Group One');
     }
 }
