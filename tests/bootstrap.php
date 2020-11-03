@@ -9,6 +9,9 @@ $startTime = time();
 error_reporting(E_ALL | E_STRICT);
 ini_set('max_execution_time', 900);
 ini_set('date.timezone', 'GMT+0');
+set_error_handler(
+    function ($no, $str, $file, $line) { throw new ErrorException($str, $no, $no, $file, $line); }
+);
 
 define('DOCTRINE_DIR', $_SERVER['DOCTRINE_DIR']);
 
