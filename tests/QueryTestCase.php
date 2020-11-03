@@ -303,7 +303,7 @@ class Doctrine_Query_TestCase extends Doctrine_UnitTestCase
     
     public function testParseTableAliasesWithBetweenInWhereClause()
     {
-        
+        $this->conn->setAttribute(Doctrine_Core::ATTR_PORTABILITY, Doctrine_Core::PORTABILITY_NONE);
         $q1 = Doctrine_Query::create()
             ->select('u.id')
             ->from('QueryTest_User u')

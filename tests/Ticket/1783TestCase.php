@@ -12,8 +12,8 @@ class Doctrine_Ticket_1783_TestCase extends Doctrine_UnitTestCase
         $this->manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_ALL);        
 
         $test = new Ticket_1783();
-        $test->bigint = PHP_INT_MAX + 1;
-        
+        $test->bigint = 2147483647 + 1;
+
         $this->assertTrue($test->isValid());
 
         $this->manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_NONE);
